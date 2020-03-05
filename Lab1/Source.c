@@ -5,14 +5,14 @@
 
 int main(void)
 {
-	int k, f, i; char x;
-	char a[100];
-	f = 1; k = 0; i = 0;
+	int num, flag, i; char x;
+	char symbol[100];
+	flag = 1; num = 0; i = 0;
 	printf("Please, enter the required value: ");
-	while (f == 1) {
+	while (flag == 1) {
 		if (i <= 4) {
-			scanf("%c", &a[i]);
-			if ((a[i] == '\n')) {
+			scanf("%c", &symbol[i]);
+			if ((symbol[i] == '\n')) {
 				break;
 			}
 		}
@@ -24,36 +24,38 @@ int main(void)
 		}
 		i += 1;
 	}
-	while (f == 1)
+	while (flag == 1)
 	{
-		k = 0;
-		if ((a[3] == '\n') || (a[2] == '\n') || (a[1] == '\n') || (a[4] == '\n')) {
-			for (i = 0; i < sizeof(a); i++) {
-				if (a[i] == '\n') {
-					break;
-				}
-				else {
-					if ((a[i] <= '9') && (a[i] >= '0')) {
-						k = k * 10 + (a[i] - '0');
-					}
-					else {
-						k = 0;
+		num = 0;
+		if ((symbol[3] == '\n') || (symbol[2] == '\n') || (symbol[1] == '\n') || (symbol[4] == '\n')) {
+			if (symbol[0] != '0') {
+				for (i = 0; i < sizeof(symbol); i++) {
+					if (symbol[i] == '\n') {
 						break;
 					}
+					else {
+						if ((symbol[i] <= '9') && (symbol[i] >= '0')) {
+							num = num * 10 + (symbol[i] - '0');
+						}
+						else {
+							num = 0;
+							break;
+						}
+					}
 				}
 			}
-			if ((k > 0) && (k < 3001)) {
-				f = 0;
+			if ((num > 0) && (num < 3001)) {
+				flag = 0;
 			}
 		}
-		if (f == 1) {
+		if (flag == 1) {
 			printf("The entered value is invalid, try again.\n");
 			printf("Please, enter the required value: ");
 			i = 0;
-			while (f == 1) {
+			while (flag == 1) {
 				if (i <= 4) {
-					scanf("%c", &a[i]);
-					if ((a[i] == '\n')) {
+					scanf("%c", &symbol[i]);
+					if ((symbol[i] == '\n')) {
 						break;
 					}
 				}
@@ -67,8 +69,8 @@ int main(void)
 			}
 		}
 	}
-	int k1 = 99 + k / 3;
-	int k2 = k % 3;
+	int k1 = 100 + (num - 1) / 3;
+	int k2 = num % 3;
 	if (k2 == 0) {
 		printf("The digit from the sequence under the given number is %d", k1 % 10);
 	}
